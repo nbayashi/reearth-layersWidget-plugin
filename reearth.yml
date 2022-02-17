@@ -11,7 +11,7 @@ extensions:
           fields:
             - id: bgcolor
               type: string
-              title: Background color
+              title: Background Color
               ui: color
     widgetLayout:
       extendable:
