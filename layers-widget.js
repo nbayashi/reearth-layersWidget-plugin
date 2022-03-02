@@ -41,13 +41,15 @@ window.addEventListener("message", e => {
   property = e.data.property;
   layers = e.source.reearth.layers.layers;
 
+  if (property.hasOwnProperty('default')){
+    
+    document.getElementById("legend_wrapper").style.backgroundColor = property.default.bgcolor;
+  }
 
   for (let i=0; i < layers.length; i++){
     addLayer(layers[i]);
   }
-  if (property.hasOwnProperty('default')){
-    document.getElementById("legend_wrapper").style.backgroundColor = property.default.bgcolor;
-  }
+
   
   
 },{ once: true }
