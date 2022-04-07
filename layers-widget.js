@@ -27,7 +27,6 @@ html, body{
   margin: 0;
   background: rgba(100,100,100,0.5);
   display: inline-block;
-  max-width: 100%;
   
 }
 </style>
