@@ -21,7 +21,6 @@ const html = `
 
 <style>
 html, body{
-  width:200px;
 }
 .legend_wrapper {
   padding:10px;
