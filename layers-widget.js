@@ -27,6 +27,8 @@ body { margin: 0; }
   padding:10px;
   margin: 0;
   background: rgba(100,100,100,0.5);
+  max-height: 200px;
+  overflow: scroll;
   
 }
 </style>
