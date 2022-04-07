@@ -20,8 +20,9 @@ const html = `
 </div>
 
 <style>
-html, body{
-}
+body { margin: 0; }
+.extendedh { width: 100%; }
+.extendedv { height: 100%; }
 .legend_wrapper {
   padding:10px;
   margin: 0;
