@@ -26,7 +26,6 @@ html, body{
   padding:10px;
   margin: 0;
   background: rgba(100,100,100,0.5);
-  display: inline-block;
   
 }
 </style>
