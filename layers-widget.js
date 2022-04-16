@@ -42,8 +42,9 @@ window.addEventListener("message", e => {
   layers = e.source.reearth.layers.layers;
 
   if (property.hasOwnProperty('default')){
-    
     document.getElementById("legend_wrapper").style.backgroundColor = property.default.bgcolor;
+  }else{
+    document.getElementById("legend_wrapper").style.backgroundColor = "transparent";
   }
 
   for (let i=0; i < layers.length; i++){
