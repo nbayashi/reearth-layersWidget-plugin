@@ -40,20 +40,23 @@ window.addEventListener("message", e => {
   earth = e.source.reearth;
   property = e.data.property;
   layers = e.source.reearth.layers.layers;
-
+  console.log(property);
   if (property.hasOwnProperty('default')){
     document.getElementById("legend_wrapper").style.backgroundColor = property.default.bgcolor;
   }else{
     document.getElementById("legend_wrapper").style.backgroundColor = "transparent";
   }
-
+  // 全てのinputを削除
+  var lblock = document.getElementById("layer-block");
+  lblock.innerHTML = "";
   for (let i=0; i < layers.length; i++){
     addLayer(layers[i]);
   }
 
   
   
-},{ once: true }
+}
+// ,{ once: true }
 );
 
 function addLayer(layer) {
@@ -87,8 +90,6 @@ function addLayer(layer) {
 }
 
 
-// let saveCheckbox = document.getElementById('saveCheckbox');
-// saveCheckbox.addEventListener('change', valueChange);
 function valueChange(check){
   var lyr= layers.find((v) => v.id === check.id);
   var lyr_list =[];
