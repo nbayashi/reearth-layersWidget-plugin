@@ -12,8 +12,3 @@
 - プラグインをインストールするとウィジェットにLayers widgetが追加されます。
 - Layers widetには、現在のプロジェクト上で表示されているレイヤが表示されます。
 - ウィジェット上でチェックボックスをクリックすると、そのレイヤの表示/非表示を切り替えることができます。
-
-## LICENSE
-Copyright (c) 2022 Naoya Nishibayashi
-
-Released under the [MIT license](https://opensource.org/licenses/mit-license.php)
