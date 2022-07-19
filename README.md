@@ -8,6 +8,13 @@
 - The contents is listed only visibility layers on Re:Earth.
 - you can turn on/off layer's visibility by click check box at published page.
 
+
+## Version up
+- 1.1.0
+  - Re:Earth本体のバージョンアップに伴っての更新。 
+- 1.0.0
+  - first release
+
 ## 使い方
 - プラグインをインストールするとウィジェットにLayers widgetが追加されます。
 - Layers widetには、現在のプロジェクト上で表示されているレイヤが表示されます。

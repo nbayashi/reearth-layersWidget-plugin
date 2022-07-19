@@ -20,7 +20,10 @@ const html = `
 </div>
 
 <style>
-body { margin: 0; }
+body {
+   margin: 0;
+
+ }
 .extendedh { width: 100%; }
 .extendedv { height: 100%; }
 .legend_wrapper {
@@ -29,62 +32,69 @@ body { margin: 0; }
   background: rgba(100,100,100,0.5);
   max-height: 200px;
   overflow: scroll;
+  width:fit-content;
   
 }
 </style>
 <script>
-let property;
-
+let property, layers;
 window.addEventListener("message", e => {
   if (e.source !== parent) return;
   earth = e.source.reearth;
   property = e.data.property;
-  layers = e.source.reearth.layers.layers;
-  console.log(property);
-  if (property.hasOwnProperty('default')){
+  layers = e.source.reearth.layers.layers.filter((v) => v.isVisible === true);
+  
+  // set background color
+  if (property.hasOwnProperty('default') && property.default.bgcolor){
     document.getElementById("legend_wrapper").style.backgroundColor = property.default.bgcolor;
   }else{
     document.getElementById("legend_wrapper").style.backgroundColor = "transparent";
   }
-  // 全てのinputを削除
-  var lblock = document.getElementById("layer-block");
-  lblock.innerHTML = "";
-  for (let i=0; i < layers.length; i++){
-    addLayer(layers[i]);
-  }
 
-  
-  
+
+  // 表示させるlayersの数が更新されるとcheckboxを再作成
+  if(layers.length !== document.getElementsByClassName("layerCheck").length){
+    var lblock = document.getElementById("layer-block");
+    lblock.innerHTML = "";
+    for (let i=0; i < layers.length; i++){
+      addLayer(layers[i]);
+    }
+  }
 }
 // ,{ once: true }
 );
 
-function addLayer(layer) {
-  if (layer.type === "marker"){
-    var icon = icon_marker;
-  }else if(layer.type ==="photooverlay"){
-    var icon = icon_photooverlay;
-  }else if(layer.type ==="ellipsoid"){
-    var icon = icon_ellipsoid;
-  }else if(layer.type ==="model"){
-    var icon = icon_model;
-  }else if(layer.type ==="tileset"){
-    var icon = icon_tileset;
-  }else if(layer.type ==="resource"){
-    var icon = icon_resource;
-  }else{
-    var icon = icon_folder;
-  }
 
+
+function addLayer(layer) {
+  if (layer.type){
+    if (layer.type === "marker"){
+      var icon = icon_marker;
+    }else if(layer.type ==="photooverlay"){
+      var icon = icon_photooverlay;
+    }else if(layer.type ==="ellipsoid"){
+      var icon = icon_ellipsoid;
+    }else if(layer.type ==="model"){
+      var icon = icon_model;
+    }else if(layer.type ==="tileset"){
+      var icon = icon_tileset;
+    }else if(layer.type ==="resource"){
+      var icon = icon_resource;
+    }else if(layer.type ==="folder"){
+      var icon = icon_folder;
+    }
+  }else{
+      var icon = icon_folder;
+  }
 
   if (layer.isVisible){
     var list = document.getElementById("layer-block");
     var add_code = '<div>'+
-    '<input type="checkbox" id="' + layer.id +'" name="' + layer.id +'" onclick="valueChange(this)" checked>'+
+    '<input type="checkbox" class="layerCheck" id="' + layer.id +'" name="' + layer.id +'" onclick="valueChange(this)">'+
     '<label for="scales">' + icon + layer.title +'</label>' +
     '</div>';
   list.insertAdjacentHTML('afterbegin', add_code);
-  // eval("var " + layer.id "= document.getElementById('" + layer.id + "');");
+  document.getElementById(layer.id).checked =true;
   }
   
 }
