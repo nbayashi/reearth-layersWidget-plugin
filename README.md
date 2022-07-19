@@ -11,7 +11,7 @@
 
 ## Version up
 - 1.1.0
-  - Re:Earth本体のバージョンアップに伴っての更新。 
+  - Re:Earth本体のバージョンアップに伴っての更新。
 - 1.0.0
   - first release
 
