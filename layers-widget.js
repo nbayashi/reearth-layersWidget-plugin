@@ -36,12 +36,16 @@ body {
   
 }
 </style>
+
 <script>
 let property, layers;
+
+
 window.addEventListener("message", e => {
   if (e.source !== parent) return;
   earth = e.source.reearth;
   property = e.data.property;
+  hiddenLyr = e.data.hiddenLyr;
   layers = e.source.reearth.layers.layers.filter((v) => v.isVisible === true);
   
   // set background color
@@ -115,12 +119,16 @@ function valueChange(check){
   if(check.checked){
     for (let j =0; j <lyr_list.length; j++){
       earth.layers.show(lyr_list[j]);
+      var index = hiddenLyr.indexOf(lyr_list[j]);
+      hiddenLyr.splice(index, 1)
     }
   }else{
     for (let j =0; j <lyr_list.length; j++){
       earth.layers.hide(lyr_list[j]);
+      hiddenLyr.push(lyr_list[j]);
     }
   }
+  parent.postMessage({hiddenLyr:hiddenLyr}, "*");
 
 }
 
@@ -192,6 +200,8 @@ const icon_folder='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16
 </script>
 `;
 
+let hiddenLyr = [];
+
 reearth.ui.show(html);
 reearth.on("update", send);
 send();
@@ -200,6 +210,14 @@ send();
 function send() {
   reearth.ui.postMessage({
     property: reearth.widget.property,
-    layers: reearth.layers.layers
+    layers: reearth.layers.layers,
+    hiddenLyr: hiddenLyr
   });
 }
+
+
+reearth.on("message", msg => {
+  hiddenLyr = msg.hiddenLyr;
+  reearth.layers["hiddenLyrId"] = hiddenLyr;
+  send()
+});
